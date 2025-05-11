@@ -1,13 +1,5 @@
 #include <stdio.h>
 #include "esp_lcd_st7735.h"
-// #include "lvgl_helpers.h"
-// #include "lvgl_spi_conf.h"
-/*
- * SPDX-FileCopyrightText: 2022-2024 Espressif Systems (Shanghai) CO LTD
- *
- * SPDX-License-Identifier: Apache-2.0
- */
-
 #include "esp_err.h"
 #include "esp_log.h"
 #include "esp_check.h"
@@ -42,10 +34,8 @@
 #define EXAMPLE_LCD_GPIO_CS (GPIO_NUM_22)
 #define EXAMPLE_LCD_GPIO_BL (GPIO_NUM_5)
 
-static const char *TAG = "EXAMPLE";
+static const char *TAG = "LCD";
 
-// LVGL image declare
-LV_IMG_DECLARE(esp_logo)
 
 /* LCD IO and panel */
 static esp_lcd_panel_io_handle_t lcd_io = NULL;
@@ -171,17 +161,6 @@ static esp_err_t app_lvgl_init(void)
     return ESP_OK;
 }
 
-// static void _app_button_cb(lv_event_t *e)
-// {
-//     lv_disp_rotation_t rotation = lv_disp_get_rotation(lvgl_disp);
-//     rotation++;
-//     if (rotation > LV_DISPLAY_ROTATION_270) {
-//         rotation = LV_DISPLAY_ROTATION_0;
-//     }
-
-//     /* LCD HW rotation */
-//     lv_disp_set_rotation(lvgl_disp, rotation);
-// }
 
 static void app_main_display(void)
 {
@@ -190,31 +169,16 @@ static void app_main_display(void)
     /* Task lock */
     lvgl_port_lock(0);
 
-    /* Your LVGL objects code here .... */
-
-    /* Create image */
-    // lv_obj_t *img_logo = lv_img_create(scr);
-    // lv_img_set_src(img_logo, &esp_logo);
-    // lv_obj_align(img_logo, LV_ALIGN_TOP_MID, 0, 20);
-
     /* Label */
     lv_obj_t *label = lv_label_create(scr);
     lv_obj_set_width(label, EXAMPLE_LCD_H_RES);
     lv_obj_set_style_text_align(label, LV_TEXT_ALIGN_CENTER, 0);
-
-    // lv_label_set_text(label, LV_SYMBOL_BELL" Hello world Espressif and LVGL "LV_SYMBOL_BELL"\n "LV_SYMBOL_WARNING" For simplier initialization, use BSP "LV_SYMBOL_WARNING);
+    
     lv_label_set_text(label, " Hello world ! ");
 
     lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
 
-    /* Button */
-    // lv_obj_t *btn = lv_btn_create(scr);
-    // label = lv_label_create(btn);
-    // lv_label_set_text_static(label, "Rotate screen");
-    // lv_obj_align(btn, LV_ALIGN_BOTTOM_MID, 0, -30);
-    // lv_obj_add_event_cb(btn, _app_button_cb, LV_EVENT_CLICKED, NULL);
 
-    /* Task unlock */
     lvgl_port_unlock();
 }
 
