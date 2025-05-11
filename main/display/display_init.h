@@ -1,6 +1,5 @@
 #ifndef DISP_INIT_H
 #define DISP_INIT_H
-#include <stdio.h>
 #include "esp_lcd_st7735.h"
 #include "esp_err.h"
 #include "esp_log.h"
